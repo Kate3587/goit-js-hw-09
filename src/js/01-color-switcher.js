@@ -11,9 +11,13 @@ btnStart.addEventListener('click', onStartCklick);
 
 let timerId;
 
+function btnSwitch(bool) {
+    btnStart.disabled = bool;
+    btnStop.disabled = !bool;
+}
+
 function onStartCklick(event) {
-    btnStart.disabled = true;
-    btnStop.disabled = false;
+    btnSwitch(true);
     timerId = setInterval(() => {
         const bodyColor = getRandomHexColor();
         bodyEl.style.background = bodyColor;
@@ -23,7 +27,7 @@ function onStartCklick(event) {
 btnStop.addEventListener('click', onStopClick);
 
 function onStopClick(event) {
-    btnStart.disabled = false;
-    btnStop.disabled = true;
+    btnSwitch(!true) 
     clearInterval(timerId);
 };
+

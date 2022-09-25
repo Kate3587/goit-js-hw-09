@@ -36,20 +36,30 @@ function onBtnStartClick(event) {
     let deltaTime = selectedTimeMs - Date.now();
     console.log(deltaTime);
     
-    timeInterval = setInterval(() => {
-    const { days, hours, minutes, seconds } = convertMs(deltaTime);
-    timeDayEl.textContent = addLeadingZero(days);
-    timeHourEl.textContent = addLeadingZero(hours);
-    timeMinuteEl.textContent = addLeadingZero(minutes);
-    timeSecondEl.textContent = addLeadingZero(seconds);
-    deltaTime -= 1000;
-    }, 1000)
+  
+  timeInterval = setInterval(() => {
+    if (deltaTime < 0) {
+    return;
+   }
+  reWrite(convertMs(deltaTime));
+   deltaTime -= 1000;
+    
+  }, 1000);
+  
 
 };
 
 function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 };
+
+function reWrite ({days, hours, minutes, seconds}) {
+  timeDayEl.textContent = addLeadingZero(days);
+  timeHourEl.textContent = addLeadingZero(hours);
+  timeMinuteEl.textContent = addLeadingZero(minutes);
+  timeSecondEl.textContent = addLeadingZero(seconds);
+}
+
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
